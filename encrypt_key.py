@@ -18,6 +18,11 @@ def encrypt_key(api_key, secret_key):
   encrypted_key = fernet.encrypt(api_key.encode())
   return base64.urlsafe_b64encode(encrypted_key).decode()
 
+def decrypt_key(encrypted_api_key, secret_key):
+  fernet = Fernet(secret_key)
+  decrypted_key = fernet.decrypt(base64.urlsafe_b64decode(encrypted_api_key.encode()))
+  return decrypted_key.decode()
+
 def main():
   secret_file_path = os.getenv('SECRET_FILE', '/docker-volume/secret.key')
   if len(sys.argv) != 2:
