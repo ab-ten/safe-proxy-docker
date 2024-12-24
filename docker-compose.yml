@@ -1,0 +1,26 @@
+#
+
+services:
+  api_proxy:
+    build: .
+    image: safe-proxy-docker
+    volumes:
+      - secret-key-volume:/docker-volume
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - .:/app:ro
+      - type: tmpfs
+        target: /tmpfs
+    networks:
+      - openai_api_proxy_default
+    ports:
+      - "8931:80"
+
+volumes:
+  secret-key-volume:
+
+# run `docker network create openai_api_proxy_default`
+# before running docker-compose up
+networks:
+  openai_api_proxy_default:
+    external: true
+    driver: bridge
