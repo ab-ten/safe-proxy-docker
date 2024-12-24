@@ -1,0 +1,12 @@
+.git
+.SourceSageignore
+.SourceSageAssets
+.emacsDo
+.editorconfig
+.env
+.pytest_cache
+__pycache__
+config.yaml
+issue_creator.log
+LICENSE
+#*#
