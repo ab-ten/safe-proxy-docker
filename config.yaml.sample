@@ -1,0 +1,19 @@
+# -*- mode: yaml; -*-
+# Server configurations for reverse proxy
+servers:
+
+  openai:
+    # Main API endpoint for OpenAI services
+    origin: "https://api.openai.com/"
+    authentication:
+      type: "Bearer"
+      keys:
+        "sk-proj-1": "Z0FBQUFBQm5hc0MtVHBtMGJJVXYyS0JYOFNWWjJoeHgtQ1dxc3VhcXFiVFlhQmEtNE04SEswUmdWNTg5cDdDU3laT1Ftd0xZQ2RlX0dDWXAyZ25MczJlbmFZcmF1a0IxWkpzUkU2LTZ2Umx3M2g2em9ueGw0Mmhsa0p0R2ZQUVBFRUVScEZWbTJMZE0tbDRCOFFiN3laclBCS29nQ25EZ1BERDJfNVQwdmQzMjJfWnVzbklsaWs0PQ=="
+        "sk-proj-test-123456": "Z0FBQUFBQm5hc0RXa0lFT1d5a3hueExmOEhVRnRzMlVwNHVEX2VhcE5uSG8zTEVCV3ZTRndvU0IwMjYxWjhDdThaTllOcnZmOEFKUEpnQVpwMU9QcE9QV21ES1NrczdNTzU1Q1Bqa2Fwd1gtYVlkV1hUbFVSSlB0UkNJSmtEVWlyMldjQ0VyOGdLX090M0NLUXdIT2xuQTVPWjF2WWxQaFprR3NBYjE5dUphZkh6V1o1ZVBpSDN3NjJFMGIyRm1lQWVCajlndVRubTdKQVBjTms4T1lISV92YkhPNy1sMDdhZz09"
+
+
+# to use this proxy (port 8931 is defined in docker-compose.yml)
+# curl http://127.0.0.1:8931/openai/v1/chat/completions -H "Content-Type: application/json" -H "Authorization: Bearer sk-proj-1" -d '{"model": "gpt-4o-mini", "messages": [{"role": "developer", "content": "You are a helpful assistant."},{"role": "user","content": "Hello!"}]}'
+
+# to generate encrypted key
+# docker compose run --rm --entrypoint /usr/local/bin/encrypt_key.py api_proxy YOUR_API_KEY
