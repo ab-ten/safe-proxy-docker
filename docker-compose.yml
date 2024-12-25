@@ -11,16 +11,16 @@ services:
       - type: tmpfs
         target: /tmpfs
     networks:
-      - openai_api_proxy_default
+      - safe_proxy_docker
     ports:
       - "8931:80"
 
 volumes:
   secret-key-volume:
 
-# run `docker network create openai_api_proxy_default`
+# run `docker network create safe_proxy_docker`
 # before running docker-compose up
 networks:
-  openai_api_proxy_default:
+  safe_proxy_docker:
     external: true
     driver: bridge
