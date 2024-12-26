@@ -39,7 +39,7 @@ def convert_config_to_db(config, db_file_path):
       server_name TEXT,
       client_dummy_key TEXT,
       plain_real_api_key TEXT,
-      UNIQUE(server_name, client_dummy_key, plain_real_api_key)
+      UNIQUE(server_name, client_dummy_key)
     )
   ''')
 

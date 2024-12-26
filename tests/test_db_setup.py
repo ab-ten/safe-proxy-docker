@@ -169,3 +169,21 @@ def test_convert_config_to_db_edge_cases(temp_dir):
     with pytest.raises(ValueError, match="Invalid config: unsupported authentication type for server server1"):
         validate_config(config)
         convert_config_to_db(config, db_file_path)
+
+def test_unique_constraint(config_file, db_file):
+    with open(config_file, 'r') as f:
+        config = yaml.safe_load(f)
+    validate_config(config)
+    convert_config_to_db(config, db_file)
+
+    conn = sqlite3.connect(db_file)
+    cursor = conn.cursor()
+
+    # Attempt to insert a duplicate entry
+    with pytest.raises(sqlite3.IntegrityError):
+        cursor.execute('''
+            INSERT INTO KEY_MAPPING (server_name, client_dummy_key, plain_real_api_key)
+            VALUES (?, ?, ?)
+        ''', ('server1', 'dummy-key-1', 'real-api-key-1'))
+
+    conn.close()
