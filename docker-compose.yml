@@ -13,9 +13,7 @@ services:
     networks:
       - safe_proxy_docker
     ports:
-      - "${HOST_PORT:-8931}:80"
-    env_file:
-      - .env
+      - "8931:80"
 
 volumes:
   secret-key-volume:
