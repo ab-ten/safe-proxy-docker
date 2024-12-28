@@ -69,6 +69,15 @@ The key features of this project are:
   export OPENAI_API_BASE=http://127.0.0.1:8931/openai/v1/
   export OPENAI_API_KEY=<DUMMY_KEY_AS_YOU_SET>
   ```
+  The default port is 8931, but you can change it in the `.env` file. For example, set the following in the `.env` file:
+  ```sh
+  HOST_PORT=8080
+  ```
+  In that case, access from the host environment will be as follows:
+  ```sh
+  export OPENAI_API_BASE=http://127.0.0.1:8080/openai/v1/
+  export OPENAI_API_KEY=<DUMMY_KEY_AS_YOU_SET>
+  ```
 
 ## License
 
