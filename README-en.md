@@ -22,20 +22,24 @@ The key features of this project are:
 
 ## Usage
 
-### Step-by-step
+### Setup
 
 1. Ensure you have Docker installed and running on your system.
 2. Create a Docker network named `safe_proxy_docker` by running the command:
    ```sh
    docker network create safe_proxy_docker
    ```
-3. Prepare your real API key that you want to encrypt.
-4. Use the `encrypt_key.py` script to encrypt your real API key. You can do this by running the following command:
+3. Run `docker compose build` to build the project:
+   ```sh
+   docker compose build
+   ```
+4. Prepare your real API key that you want to encrypt.
+5. Use the `encrypt_key.py` script to encrypt your real API key. You can do this by running the following command:
    ```sh
    docker compose run --rm --entrypoint /usr/local/bin/encrypt_key.py api_proxy YOUR_API_KEY
    ```
    Replace `YOUR_API_KEY` with your actual API key. This command will output the encrypted API key.
-5. Copy the encrypted API key and update the `config.yaml` file with the encrypted key. You can use the `config.yaml.sample` as a reference. For example:
+6. Copy the encrypted API key and update the `config.yaml` file with the encrypted key. You can use the `config.yaml.sample` as a reference. For example:
    ```yaml
    servers:
      openai:
@@ -46,8 +50,8 @@ The key features of this project are:
            "sk-proj-1": "ENCRYPTED_API_KEY"
    ```
    Replace `ENCRYPTED_API_KEY` with the encrypted key you obtained in the previous step.
-6. Save the updated `config.yaml` file in the root directory of the project.
-7. Copy the `.env.sample` file to `.env` and edit it if necessary. For example, to change the host machine port, set the `HOST_PORT`:
+7. Save the updated `config.yaml` file in the root directory of the project.
+8. Copy the `.env.sample` file to `.env` and edit it if necessary. For example, to change the host machine port, set the `HOST_PORT`:
    ```sh
    cp .env.sample .env
    ```
@@ -55,7 +59,23 @@ The key features of this project are:
 
 ### Use `docker compose` command
 
-- Start `safe-proxy-docker` by running `docker compose up -d` or `docker compose up`.
+- Start `safe-proxy-docker` by running `docker compose up -d` or `docker compose up`. After setup, you can start it with only `docker compose up [-d]`.
+
+### Update Procedure
+
+- To update the project, run the following commands:
+  ```sh
+  git pull
+  docker compose build
+  ```
+
+### Procedure when changing `config.yaml`
+
+- If you change `config.yaml`, you need to restart the Docker container. Run the following commands:
+  ```sh
+  docker compose down
+  docker compose up -d
+  ```
 
 ### Usage from other docker containers
 
