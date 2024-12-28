@@ -47,6 +47,11 @@ The key features of this project are:
    ```
    Replace `ENCRYPTED_API_KEY` with the encrypted key you obtained in the previous step.
 6. Save the updated `config.yaml` file in the root directory of the project.
+7. Copy the `.env.sample` file to `.env` and edit it if necessary. For example, to change the host machine port, set the `HOST_PORT`:
+   ```sh
+   cp .env.sample .env
+   ```
+   If using the default value, there is no need to create or edit the `.env` file.
 
 ### Use `docker compose` command
 
@@ -69,6 +74,10 @@ The key features of this project are:
   export OPENAI_API_BASE=http://127.0.0.1:8931/openai/v1/
   export OPENAI_API_KEY=<DUMMY_KEY_AS_YOU_SET>
   ```
+
+### Default value and effect of `HOST_PORT` setting
+
+- The default value of `HOST_PORT` is `8931`. By setting `HOST_PORT`, you can map any port on the host machine to port `80` of the container. For example, if you set `HOST_PORT=8080`, port `8080` on the host machine will be mapped to port `80` of the container.
 
 ## License
 
