@@ -1,4 +1,4 @@
-# safe-proxy-docker
+# safe-proxy-docker v0.1.1
 
 [Japanese README](README.md)
 
