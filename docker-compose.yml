@@ -13,7 +13,7 @@ services:
     networks:
       - safe_proxy_docker
     ports:
-      - "8931:80"
+      - "${HOST_PORT:-8931}:80"
 
 volumes:
   secret-key-volume:
