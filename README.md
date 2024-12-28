@@ -22,20 +22,24 @@
 
 ## 使い方
 
-### ステップバイステップで
+### セットアップ
 
 1. Dockerがシステムにインストールされ、実行されていることを確認します。
 2. 次のコマンドを実行して、`safe_proxy_docker`という名前のDockerネットワークを作成します：
    ```sh
    docker network create safe_proxy_docker
    ```
-3. 暗号化したいリアルAPIキーを準備します。
-4. `encrypt_key.py`スクリプトを使用してリアルAPIキーを暗号化します。次のコマンドを実行します：
+3. `docker compose build`を実行してプロジェクトをビルドします：
+   ```sh
+   docker compose build
+   ```
+4. 暗号化したいリアルAPIキーを準備します。
+5. `encrypt_key.py`スクリプトを使用してリアルAPIキーを暗号化します。次のコマンドを実行します：
    ```sh
    docker compose run --rm --entrypoint /usr/local/bin/encrypt_key.py api_proxy YOUR_API_KEY
    ```
    `YOUR_API_KEY`を実際のAPIキーに置き換えます。このコマンドは暗号化されたAPIキーを出力します。
-5. 暗号化されたAPIキーをコピーし、`config.yaml`ファイルに更新します。`config.yaml.sample`を参考にします。例えば：
+6. 暗号化されたAPIキーをコピーし、`config.yaml`ファイルに更新します。`config.yaml.sample`を参考にします。例えば：
    ```yaml
    servers:
      openai:
@@ -46,8 +50,8 @@
            "sk-proj-1": "ENCRYPTED_API_KEY"
    ```
    `ENCRYPTED_API_KEY`を前のステップで取得した暗号化キーに置き換えます。
-6. 更新された`config.yaml`ファイルをプロジェクトのルートディレクトリに保存します。
-7. `.env.sample`ファイルを`.env`ファイルにコピーし、必要に応じて編集します。例えば、ホストマシンのポートを変更する場合は、`HOST_PORT`を設定します。
+7. 更新された`config.yaml`ファイルをプロジェクトのルートディレクトリに保存します。
+8. `.env.sample`ファイルを`.env`ファイルにコピーし、必要に応じて編集します。例えば、ホストマシンのポートを変更する場合は、`HOST_PORT`を設定します。
    ```sh
    cp .env.sample .env
    ```
@@ -55,7 +59,23 @@
 
 ### `docker compose`コマンドの使用
 
-- `docker compose up -d`もしくは`docker compose up`で`safe-proxy-docker`を起動します。
+- `docker compose up -d`もしくは`docker compose up`で`safe-proxy-docker`を起動します。セットアップ完了後は、`docker compose up [-d]`のみで起動できます。
+
+### 更新手順
+
+- プロジェクトを更新するには、次のコマンドを実行します：
+  ```sh
+  git pull
+  docker compose build
+  ```
+
+### `config.yaml`を変更した場合の手順
+
+- `config.yaml`を変更した場合、Dockerコンテナを再起動する必要があります。次のコマンドを実行します：
+  ```sh
+  docker compose down
+  docker compose up -d
+  ```
 
 ### 他のDockerコンテナからの使い方
 
