@@ -120,3 +120,26 @@ Dockerfile の起動シェルスクリプトから呼び出され、以下の処
   - /app: ホストのプロジェクトトップディレクトリ
   - /tmpfs: tmpfs マウントポイント
   - /docker-volume: docker volume マウントポイント
+
+## VERSION ファイルについて
+
+プロジェクトには `VERSION` ファイルが含まれており、現在のバージョン番号が記載されています。
+
+### VERSION ファイルの構造
+
+`VERSION` ファイルは以下のような構造を持ちます：
+
+```
+0.1.0
+# This file contains the version number of the project.
+# The first line represents the current version.
+# Subsequent lines are comments explaining the purpose of the file.
+```
+
+- 最初の行には現在のバージョン番号が記載されています。
+- 2行目以降には、ファイルの目的を説明するコメントが記載されています。
+
+### VERSION ファイルの使用方法
+
+- コンテナ起動時に `VERSION` ファイルの内容が読み込まれ、バージョン情報が表示されます。
+- `entrypoint.sh` スクリプト内で `VERSION` ファイルの内容が読み込まれ、コンテナ起動時にバージョン情報が表示されます。

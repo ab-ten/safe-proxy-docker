@@ -20,6 +20,7 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip \
 
 COPY --chmod=755 *.py *.sh /usr/local/bin/
 COPY --chmod=644 nginx.conf /etc/nginx/nginx.conf
+COPY VERSION /app/VERSION
 
 RUN mkdir -p /docker-volume /tmpfs
 
