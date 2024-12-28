@@ -1,4 +1,5 @@
-# safe-proxy-docker
+# safe-proxy-docker v0.1.1
+<!-- This file contains the version number of the project. Changes should be reflected in README-en.md. -->
 
 [English README](README-en.md)
 
